@@ -9,7 +9,7 @@ class acf_field_button extends acf_field {
 	*  This function will setup the field type data
 	*
 	*  @type	function
-	*  @date	5/03/2014
+	*  @date	3/19/2019
 	*  @since	5.0.0
 	*
 	*  @param	n/a
@@ -22,21 +22,21 @@ class acf_field_button extends acf_field {
 		*  name (string) Single word, no spaces. Underscores allowed
 		*/
 		
-		$this->name = 'button';
+		$this->name = 'ajax_button';
 		
 		
 		/*
 		*  label (string) Multiple words, can include spaces, visible when selecting a field type
 		*/
 		
-		$this->label = __('Button', 'acf-button');
+		$this->label = __('AJAX Button', 'acf-button');
 		
 		
 		/*
 		*  category (string) basic | content | choice | relational | jquery | layout | CUSTOM GROUP NAME
 		*/
 		
-		$this->category = 'basic';
+		$this->category = 'Advanced';
 		
 		
 		/*
@@ -107,7 +107,8 @@ class acf_field_button extends acf_field {
 			'name'		=>	'button_action',
 			'choices' 	=>	[
 				'ajax_get'	=> 'AJAX GET Request',
-				'open_url'	=> 'Open a URL'
+				'open_url'	=> 'Open a URL',
+				'open_url_self'	=> 'Open a URL (SELF)'
 			]
 		)); 
 
@@ -127,6 +128,32 @@ class acf_field_button extends acf_field {
 			'prepend'		=> 'px',
 		));
 		*/
+		
+		
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Background Color','acf-button'),
+			'instructions'	=> __('Customise the background. ex: #999999 or red','acf-button'),
+			'type'			=> 'text',
+			'name'			=> 'bg_color',
+			//'append'		=> '#',
+		));
+		
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Button Class','acf-button'),
+			'instructions'	=> __('Enter a Class name.),
+			'type'			=> 'text',
+			'name'			=> 'btn_class',
+			//'append'		=> '#',
+		));
+		
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Custom CSS','acf-button'),
+			'instructions'	=> __('Custom css for button.),
+			'type'			=> 'text',
+			'name'			=> 'btn_css',
+			//'append'		=> '#',
+		));	
+
 
 	}
 	
@@ -223,6 +250,9 @@ class acf_field_button extends acf_field {
 				}
 				else if( field.button_action == 'open_url' ) {
 					window.open(url)
+				}				
+				else if( field.button_action == 'open_url_self' ) {
+					window.location.href = url;
 				}
 			});
 
@@ -241,7 +271,15 @@ class acf_field_button extends acf_field {
 		});
 		</script>
 
-		<input id="<?=$uid?>" type="button" class="button button-primary button-large" value="<?=$field['text']?>">
+                <style><?= $field['btn_css'];?></style>
+		<?php
+		$bgcolor = "";
+		if(!$field['btn_css']):
+		$bgcolor = " style=background:".$field['bg_color']." !important;";
+		endif;
+		?>
+
+		<input id="<?=$uid?>" type="button" class="<?= $field['btn_class']; ?> button button-primary button-large" value="<?=$field['text']?>"<?=$bgcolor;?>>
 
 		<?php
 	}
