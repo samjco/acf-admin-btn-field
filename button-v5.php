@@ -132,7 +132,7 @@ class acf_field_button extends acf_field {
 		
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Background Color','acf-button'),
-			'instructions'	=> __('Customise the background. ex: #999999 or red','acf-button'),
+			'instructions'	=> __('ex: #999999 or red','acf-button'),
 			'type'			=> 'text',
 			'name'			=> 'bg_color',
 			//'append'		=> '#',
@@ -140,15 +140,15 @@ class acf_field_button extends acf_field {
 		
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Button Class','acf-button'),
-			'instructions'	=> __('Enter a Class name.),
+			'instructions'	=> __('Enter a Class name.'),
 			'type'			=> 'text',
 			'name'			=> 'btn_class',
 			//'append'		=> '#',
 		));
 		
 		acf_render_field_setting( $field, array(
-			'label'			=> __('Custom CSS','acf-button'),
-			'instructions'	=> __('Custom css for button.),
+			'label'			=> __('Inline CSS','acf-button'),
+			'instructions'	=> __('Custom css for button.'),
 			'type'			=> 'text',
 			'name'			=> 'btn_css',
 			//'append'		=> '#',
@@ -270,12 +270,12 @@ class acf_field_button extends acf_field {
 			}
 		});
 		</script>
-
-                <style><?= $field['btn_css'];?></style>
 		<?php
 		$bgcolor = "";
 		if(!$field['btn_css']):
-		$bgcolor = " style=background:".$field['bg_color']." !important;";
+		$bgcolor = 'style="background:'.$field['bg_color'].' !important;"';
+	    else:
+		$bgcolor = 'style="'.$field['btn_css'].'"';
 		endif;
 		?>
 
@@ -341,15 +341,16 @@ class acf_field_button extends acf_field {
 	*  @return	n/a
 	*/
 
-	/*
+
 		
-	function input_admin_head() {
+	// function input_admin_head( $field ) {
+	
+	// echo "<style>".$field['btn_css']."</style>";
 	
 		
-		
-	}
+	// }
 	
-	*/
+
 	
 	
 	/*
