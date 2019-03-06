@@ -1,11 +1,11 @@
 <?php
 /*
-	Plugin Name: Advanced Custom Fields: Button
-	Plugin URI: https://github.com/envex/acf-button-field
+	Plugin Name: Advanced Custom Fields: Admin AJAX Button
+	Plugin URI: https://github.com/samjco/acf-admin-button-field/
 	Description: Creates a set of button fields for the Advanced Custom Fields plugin
 	Version: 1.0.0
-	Author: Matt Cromwell
-	Author URI: http://mattcromwell.com
+	Author: Sam Cohen
+	Author URI: http:/samjco.com
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
